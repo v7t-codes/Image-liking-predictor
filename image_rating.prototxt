@@ -1,0 +1,78 @@
+name:"ImageRatingGenerator"
+//input layer, use HDF5 layerincase of multidimensional labels
+layer{
+	name:"Layer1"
+	type:"ImageData"
+	top :"data"
+	top:"label"
+	image_data_param{
+		file_name:"./data/img_rating/lists.txt"
+		batch_size:20 
+		new_height:256
+		new_width:256
+	}
+}
+//second layer,convolutional layer
+layer{
+	name:"Layer2"
+	type:"Convolution"
+	bottom:"data"
+	top:"convolved_output"
+	blobs_lr:1
+	blobs_lr:2
+	weight_decay:1
+	weight_decay:0
+	convolution_param{
+		num_output:100
+		kernel_size:9
+		stride:3
+		weight_filler{
+			type:"gaussian"
+			std:0.01
+		}
+		bias_filler{
+			type:"constant"
+			value:0
+		}
+	}
+}
+//third_layer a fully connected network, innerproduct_layer
+
+layer{
+	name:"Layer3"
+	type:"InnerProduct"
+	bottom:"convolved_output"
+	top:"fc"
+	blobs_lr:1
+	blobs_lr:2
+	weight_decay:1
+	weight_decay:0
+	innner_product_param{
+		num_output:5
+                weight_filler{
+			type:"gaussian"
+			std:0.01
+		}
+		bias_filler{
+			type:"constant"
+			value:0
+		}
+	}
+}
+//fourth softmax layer, generates a softmax distribution
+layer{
+	name:"Layer4"
+	type:"SoftmaxWithLoss"
+ 	bottom:"fc"
+	top:"perdict" 
+}
+
+//fifth layerloss for backpropagations
+layer {
+	name : "Layer4"
+	type : "SoftmaxWithLoss"
+	bottom : "fc"
+	bottom : "label"
+	top:"loss"
+}
+
