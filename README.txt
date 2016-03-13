@@ -10,6 +10,6 @@ Run the deply_image_rating.prototxt file.
 
 
 To learn more about installation and the use of caffe refer to the following links--
-caffe.berkeleyvision.org/installation.html
+http://caffe.berkeleyvision.org/installation.html
 other examples 
 http://caffe.berkeleyvision.org/gathered/examples/mnist.html
