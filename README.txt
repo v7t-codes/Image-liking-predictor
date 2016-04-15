@@ -6,7 +6,7 @@ blob contains a batch of the corresponding labels. Note that the layer only take
 of multidimensional labels, use the HDF5 nput layer.
 
 Use the pycaffe interface to deploy the trained network.
-Run the deply_image_rating.prototxt file.
+Run the deploy_image_rating.prototxt file.
 
 
 To learn more about installation and the use of caffe refer to the following links--
